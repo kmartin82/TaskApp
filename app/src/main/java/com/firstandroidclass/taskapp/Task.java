@@ -1,5 +1,7 @@
 package com.firstandroidclass.taskapp;
 
+import android.util.Log;
+
 import java.util.UUID;
 
 /**
@@ -33,6 +35,7 @@ public class Task {
     }
 
     public void setName(String name) {
+        Log.i(TAG, "New name: " + name);
         mName = name;
     }
 
@@ -41,6 +44,7 @@ public class Task {
     }
 
     public void setDescription(String description) {
+        Log.i(TAG, "New description: " + description);
         mDescription = description;
     }
 

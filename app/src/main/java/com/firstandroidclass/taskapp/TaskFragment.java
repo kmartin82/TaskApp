@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
@@ -17,7 +18,7 @@ public class TaskFragment extends Fragment {
     private Task mTask;
     private EditText mNameField;
     private EditText mDescriptionField;
-    private EditText mCompletionField;
+    private CheckBox mCompletionField;
     private EditText mDueDateField;
     private EditText mLocationField;
 

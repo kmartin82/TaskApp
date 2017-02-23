@@ -13,7 +13,7 @@ public class Task {
     private UUID mID;
     private String mName;
     private String mDescription;
-    private Boolean mCompletion;
+    private boolean mIsComplete;
     private String mDueDate;
     private String mlocation;
 
@@ -48,12 +48,12 @@ public class Task {
         mDescription = description;
     }
 
-    public Boolean getCompletion() {
-        return mCompletion;
+    public boolean isComplete() {
+        return mIsComplete;
     }
 
-    public void setCompletion(Boolean completion) {
-        mCompletion = completion;
+    public void setComplete(boolean complete) {
+        mIsComplete = complete;
     }
 
     public String getDueDate() {

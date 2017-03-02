@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/task_name"
         android:hint="@string/name_hint"
+        android:padding="20dp" />
+
+  <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:id="@+id/task_description"
+        android:hint="@string/description_hint"
+        android:padding="20dp" />
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_complete"
+        android:padding="20dp"
+        android:text="@string/complete_hint"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:id="@+id/task_date"
+        android:hint="@string/due_date_hint"
         android:padding="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textImeMultiLine"
-        android:ems="10"
-        android:id="@+id/task_description"
-        android:padding="20dp"
-        android:hint="@string/description_hint" />
+        android:inputType="textPersonName"
+        android:id="@+id/task_location"
+        android:hint="@string/location_hint"
+        android:padding="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:id="@+id/task_category"
+        android:hint="@string/category_hint"
+        android:padding="20dp" />
 
 </LinearLayout>

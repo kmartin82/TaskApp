@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/task_name"
         android:hint="@string/name_hint"
         android:padding="20dp" />
@@ -18,39 +17,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/task_description"
-        android:hint="Description"/>
+        android:hint="@string/description_hint"
+        android:padding="20dp" />
 
     <CheckBox
-        android:text="Complete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/task_complete"
-        android:hint="@string/complete_hint"/>
+        android:padding="20dp"
+        android:text="@string/complete_hint"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:ems="10"
         android:id="@+id/task_date"
-        android:hint="Date"/>
+        android:hint="@string/due_date_hint"
+        android:padding="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/task_location"
-        android:hint="Location"/>
+        android:hint="@string/location_hint"
+        android:padding="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/task_category"
-        android:hint="Category"/>
-  
+        android:hint="@string/category_hint"
+        android:padding="20dp" />
+
 </LinearLayout>

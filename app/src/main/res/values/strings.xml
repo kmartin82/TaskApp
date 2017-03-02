@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TaskApp</string>
     <string name="name_hint">Name</string>
-    <string name="description_hint">Name</string>
+    <string name="description_hint">Description</string>
     <string name="complete_hint">Complete</string>
     <string name="due_date_hint">Due Date</string>
     <string name="location_hint">Location</string>

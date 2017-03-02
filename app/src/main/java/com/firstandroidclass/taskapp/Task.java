@@ -1,28 +1,20 @@
 package com.firstandroidclass.taskapp;
 
-/*
- * Created by Rick on 2/13/2017.
- */
-
-import java.util.UUID;
 import java.util.Date;
-
-import android.text.method.DateTimeKeyListener;
 import android.util.Log;
-
 import java.util.UUID;
 
 public class Task {
     private static final String TAG = Task.class.getSimpleName();
     private UUID mID;
-    private String mTaskName;
-    private String mTaskDesc;
-    private Boolean mTaskComplete;
+    private String mName;
+    private String mDescription;
+    private boolean mIsComplete;
     private Date mDueDate;
     private String mLocation;
-    private String mCategory;
+    private Category mCategory;
 
-    public Task() {
+    public Task(){
         mID = UUID.randomUUID();
     }
 
@@ -30,31 +22,30 @@ public class Task {
         return mID;
     }
 
-    public String getTaskName() {
-        return mTaskName;
+    public String getName() {
+        return mName;
     }
 
-    public void setTaskName(String taskName) {
-        mTaskName = taskName;
-        Log.i(TAG, "New name: " + taskName);
+    public void setName(String name) {
+        Log.i(TAG, "New name: " + name);
+        mName = name;
     }
 
-    public String getTaskDesc() {
-        return mTaskDesc;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public void setTaskDesc(String taskDesc) {
-        mTaskDesc = taskDesc;
-        Log.i(TAG, "New description: " + taskDesc);
+    public void setDescription(String description) {
+        Log.i(TAG, "New description: " + description);
+        mDescription = description;
     }
 
-    public Boolean getTaskComplete() {
-        return mTaskComplete;
+    public boolean isComplete() {
+        return mIsComplete;
     }
 
-    public void setTaskComplete(Boolean taskComplete) {
-        mTaskComplete = taskComplete;
-        Log.i(TAG, "New complete: " + mTaskComplete);
+    public void setComplete(boolean complete) {
+        mIsComplete = complete;
     }
 
     public Date getDueDate() {
@@ -63,7 +54,6 @@ public class Task {
 
     public void setDueDate(Date dueDate) {
         mDueDate = dueDate;
-        Log.i(TAG, "New duedate: " + mDueDate);
     }
 
     public String getLocation() {
@@ -75,12 +65,11 @@ public class Task {
         Log.i(TAG, "New location: " + mLocation);
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return mCategory;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         mCategory = category;
-        Log.i(TAG, "New category: " + mCategory);
     }
 }

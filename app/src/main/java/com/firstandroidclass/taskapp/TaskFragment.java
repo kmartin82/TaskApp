@@ -1,9 +1,5 @@
 package com.firstandroidclass.taskapp;
 
-/*
- * Created by Rick on 2/14/2017.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -12,55 +8,61 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.CheckBox;
 
-public class TaskFragment extends Fragment{
+public class TaskFragment extends Fragment {
     private Task mTask;
     private EditText mNameField;
     private EditText mDescriptionField;
+    private CheckBox mCompletionField;
+    private EditText mDueDateField;
+    private EditText mLocationField;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mTask = new Task();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_task, container, false);
 
-        mNameField = (EditText) v.findViewById(R.id.task_name);
+        mNameField = (EditText) view.findViewById(R.id.task_name);
         mNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //No new behavior
+
             }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int count, int after) {
-                mTask.setTaskName(s.toString());
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTask.setName(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
-                //No new behavior
+
             }
         });
 
-        mDescriptionField = (EditText) v.findViewById(R.id.task_description);
+        mDescriptionField = (EditText) view.findViewById(R.id.task_description);
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //No new behavior
+
             }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int count, int after) {
-                mTask.setTaskName(s.toString());
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTask.setDescription(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
-                //No new behavior
+
             }
         });
-
-        return v;
-
+        return view;
     }
 }

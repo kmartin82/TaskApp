@@ -10,10 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-/**
- * Created by sarahmcculley on 2/23/17.
- */
-
 public class TaskFragment extends Fragment {
     private Task mTask;
     private EditText mNameField;
@@ -21,7 +17,6 @@ public class TaskFragment extends Fragment {
     private CheckBox mCompletionField;
     private EditText mDueDateField;
     private EditText mLocationField;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -60,7 +55,7 @@ public class TaskFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTask.setName(s.toString());
+                mTask.setDescription(s.toString());
             }
 
             @Override
@@ -69,7 +64,5 @@ public class TaskFragment extends Fragment {
             }
         });
         return view;
-
-
     }
 }

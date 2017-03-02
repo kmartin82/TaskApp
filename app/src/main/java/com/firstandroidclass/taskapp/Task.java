@@ -1,12 +1,7 @@
 package com.firstandroidclass.taskapp;
 
 import android.util.Log;
-
 import java.util.UUID;
-
-/**
- * Created by sarahmcculley on 2/22/17.
- */
 
 public class Task {
     private static final String TAG = Task.class.getSimpleName();
@@ -15,19 +10,14 @@ public class Task {
     private String mDescription;
     private boolean mIsComplete;
     private String mDueDate;
-    private String mlocation;
+    private String mLocation;
 
-
-    public Task() {
+    public Task(){
         mID = UUID.randomUUID();
     }
 
     public UUID getID() {
         return mID;
-    }
-
-    public void setID(UUID ID) {
-        mID = ID;
     }
 
     public String getName() {
@@ -64,11 +54,11 @@ public class Task {
         mDueDate = dueDate;
     }
 
-    public String getMlocation() {
-        return mlocation;
+    public String getLocation() {
+        return mLocation;
     }
 
-    public void setMlocation(String mlocation) {
-        this.mlocation = mlocation;
+    public void setLocation(String location) {
+        mLocation = location;
     }
 }

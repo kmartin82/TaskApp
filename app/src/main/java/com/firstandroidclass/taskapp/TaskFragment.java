@@ -1,7 +1,5 @@
 package com.firstandroidclass.taskapp;
 
-import android.support.v4.app.Fragment;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -10,19 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
-
+import android.widget.CheckBox;
 
 public class TaskFragment extends Fragment {
     private Task mTask;
     private EditText mNameField;
     private EditText mDescriptionField;
+    private CheckBox mCompletionField;
+    private EditText mDueDateField;
+    private EditText mLocationField;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mTask = new Task();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
@@ -45,7 +46,6 @@ public class TaskFragment extends Fragment {
             }
         });
 
-
         mDescriptionField = (EditText) view.findViewById(R.id.task_description);
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -56,7 +56,6 @@ public class TaskFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTask.setDescription(s.toString());
-
             }
 
             @Override
@@ -64,8 +63,6 @@ public class TaskFragment extends Fragment {
 
             }
         });
-
         return view;
     }
-
 }

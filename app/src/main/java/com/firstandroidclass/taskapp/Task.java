@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import java.util.Date;
 import android.util.Log;
 import java.util.UUID;
 
@@ -9,8 +10,9 @@ public class Task {
     private String mName;
     private String mDescription;
     private boolean mIsComplete;
-    private String mDueDate;
+    private Date mDueDate;
     private String mLocation;
+    private Category mCategory;
 
     public Task(){
         mID = UUID.randomUUID();
@@ -46,11 +48,11 @@ public class Task {
         mIsComplete = complete;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         mDueDate = dueDate;
     }
 
@@ -60,5 +62,14 @@ public class Task {
 
     public void setLocation(String location) {
         mLocation = location;
+        Log.i(TAG, "New location: " + mLocation);
+    }
+
+    public Category getCategory() {
+        return mCategory;
+    }
+
+    public void setCategory(Category category) {
+        mCategory = category;
     }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
 
     <EditText
         android:layout_width="match_parent"
@@ -12,13 +14,43 @@
         android:hint="@string/name_hint"
         android:padding="20dp" />
 
+  <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/task_description"
+        android:hint="Description"/>
+
+    <CheckBox
+        android:text="Complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_complete"
+        android:hint="@string/complete_hint"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textImeMultiLine"
+        android:inputType="date"
         android:ems="10"
-        android:id="@+id/task_description"
-        android:padding="20dp"
-        android:hint="@string/description_hint" />
+        android:id="@+id/task_date"
+        android:hint="Date"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/task_location"
+        android:hint="Location"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/task_category"
+        android:hint="Category"/>
+  
 </LinearLayout>

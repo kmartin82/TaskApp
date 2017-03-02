@@ -1,5 +1,7 @@
 package com.firstandroidclass.taskapp;
 
+import java.util.UUID;
+
 enum Color {GREEN, YELLOW, RED}
 
 public class Category {

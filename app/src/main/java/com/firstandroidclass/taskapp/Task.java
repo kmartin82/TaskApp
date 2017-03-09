@@ -1,12 +1,8 @@
 package com.firstandroidclass.taskapp;
 
+import java.util.Date;
 import android.util.Log;
-
 import java.util.UUID;
-
-/**
- * Created by sarahmcculley on 2/22/17.
- */
 
 public class Task {
     private static final String TAG = Task.class.getSimpleName();
@@ -14,20 +10,16 @@ public class Task {
     private String mName;
     private String mDescription;
     private boolean mIsComplete;
-    private String mDueDate;
-    private String mlocation;
+    private Date mDueDate;
+    private String mLocation;
+    private Category mCategory;
 
-
-    public Task() {
+    public Task(){
         mID = UUID.randomUUID();
     }
 
     public UUID getID() {
         return mID;
-    }
-
-    public void setID(UUID ID) {
-        mID = ID;
     }
 
     public String getName() {
@@ -56,19 +48,28 @@ public class Task {
         mIsComplete = complete;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         mDueDate = dueDate;
     }
 
-    public String getMlocation() {
-        return mlocation;
+    public String getLocation() {
+        return mLocation;
     }
 
-    public void setMlocation(String mlocation) {
-        this.mlocation = mlocation;
+    public void setLocation(String location) {
+        mLocation = location;
+        Log.i(TAG, "New location: " + mLocation);
+    }
+
+    public Category getCategory() {
+        return mCategory;
+    }
+
+    public void setCategory(Category category) {
+        mCategory = category;
     }
 }

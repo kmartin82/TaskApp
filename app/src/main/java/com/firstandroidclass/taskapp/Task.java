@@ -10,7 +10,7 @@ public class Task {
     private String mName;
     private String mDescription;
     private boolean mIsComplete;
-    private Date mDueDate;
+    private String mDueDate;
     private String mLocation;
     private Category mCategory;
 
@@ -48,11 +48,11 @@ public class Task {
         mIsComplete = complete;
     }
 
-    public Date getDueDate() {
+    public String getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(String dueDate) {
         mDueDate = dueDate;
     }
 

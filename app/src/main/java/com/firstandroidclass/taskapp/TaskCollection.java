@@ -19,8 +19,15 @@ public class TaskCollection {
             Task task = new Task();
             task.setName("Task "+ i);
             task.setDescription("Description " + i);
-            task.setDueDate("Due Date " +i);
+            task.setDueDate("Due Date " + i);
             task.setLocation("Location " + i);
+            if (i % 10 == 0){
+                task.setComplete(true);
+            }
+
+            List<Category> allCategories =  CategoryCollection.get().getCategories();
+            Category category = allCategories.get(i % allCategories.size());
+            task.setCategory(category);
 
             mTasks.add(task);
         }
@@ -32,5 +39,18 @@ public class TaskCollection {
             mTaskCollection = new TaskCollection();
         }
         return mTaskCollection;
+    }
+
+    public List<Task> getTasks(){
+        return mTasks;
+    }
+
+    public Task getTask(UUID id){
+        for (Task task: mTasks){
+            if(task.getID().equals(id)){
+                return task;
+            }
+        }
+        return null;
     }
 }

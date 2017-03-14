@@ -72,4 +72,6 @@ public class Task {
     public void setCategory(Category category) {
         mCategory = category;
     }
+
+
 }

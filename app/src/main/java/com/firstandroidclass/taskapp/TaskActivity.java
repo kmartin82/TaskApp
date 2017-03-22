@@ -6,21 +6,14 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import java.util.List;
+import java.util.UUID;
 
-public class TaskActivity extends FragmentActivity {
+public class TaskActivity extends SingleFragmentActivity {
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null) {
-            fragment = new TaskFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+    protected Fragment createFragment() {
+        return new TaskFragment();
     }
+
 }

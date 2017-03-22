@@ -20,6 +20,8 @@ public class Category {
     public void setName(String name) {
         mName = name;
     }
+
+    public void setColor(Color color) {mColor = color;}
   
     public UUID getID() {
         return mID;

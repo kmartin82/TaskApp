@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
+import java.util.UUID;
+
 public class TaskFragment extends Fragment {
+    private static final String ARG_TASK_ID = "task_id";
     private Task mTask;
     private EditText mNameField;
     private EditText mDescriptionField;
@@ -21,7 +24,16 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mTask = new Task();
+        UUID taskID = (UUID) getArguments().getSerializable(ARG_TASK_ID);
+        mTask = TaskCollection.get().getTask(taskID);
+    }
+
+    public static TaskFragment newInstance(UUID taskID){
+        TaskFragment taskFragment = new TaskFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TASK_ID, taskID);
+        taskFragment.setArguments(args);
+        return taskFragment;
     }
 
     @Override
@@ -29,6 +41,7 @@ public class TaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
         mNameField = (EditText) view.findViewById(R.id.task_name);
+        mNameField.setText(mTask.getName());
         mNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -47,6 +60,7 @@ public class TaskFragment extends Fragment {
         });
 
         mDescriptionField = (EditText) view.findViewById(R.id.task_description);
+        mDescriptionField.setText(mTask.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

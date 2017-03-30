@@ -1,6 +1,8 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,11 +25,10 @@ public class TaskCollectionFragment extends Fragment {
     private TaskAdapter mTaskAdapter;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         View view = inflater.inflate(R.layout.fragment_task_collection, container,
+        View view = inflater.inflate(R.layout.fragment_task_collection, container,
                 false);
 
         mTaskCollectionRecyclerView =
@@ -35,23 +37,47 @@ public class TaskCollectionFragment extends Fragment {
                 new LinearLayoutManager(getActivity()));
 
         updateUI();
-         return view;
+        return view;
     }
 
-    private void updateUI(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
+    private void updateUI() {
         TaskCollection taskCollection = TaskCollection.get();
         List<Task> tasks = taskCollection.getTasks();
-        mTaskAdapter = new TaskAdapter(tasks);
-        mTaskCollectionRecyclerView.setAdapter(mTaskAdapter);
+        if (mTaskAdapter == null) {
+            mTaskAdapter = new TaskAdapter(tasks);
+            mTaskCollectionRecyclerView.setAdapter(mTaskAdapter);
+        } else {
+            mTaskAdapter.notifyDataSetChanged();
+        }
     }
 
-    private class TaskHolder extends RecyclerView.ViewHolder {
+    private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTaskNameTextView;
+        private Task mTask;
 
         public TaskHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             mTaskNameTextView = (TextView) itemView;
         }
+
+        public void bindTask(Task task) {
+            mTask = task;
+            mTaskNameTextView.setText(mTask.getName());
+        }
+
+        @Override
+        public void onClick(View v) {
+             Intent intent = TaskActivity.newIntent(getActivity(), mTask.getID());
+            startActivity(intent);
+        }
+
 
     }
 
@@ -74,13 +100,13 @@ public class TaskCollectionFragment extends Fragment {
         @Override
         public void onBindViewHolder(TaskHolder holder, int position) {
             Task task = mTasks.get(position);
-            holder.mTaskNameTextView.setText(task.getName());
+            holder.bindTask(task);
         }
+
         @Override
         public int getItemCount() {
             return mTasks.size();
         }
     }
-
 
 }

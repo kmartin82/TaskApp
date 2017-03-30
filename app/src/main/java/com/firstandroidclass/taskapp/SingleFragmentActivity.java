@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,6 +28,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     .commit();
         }
     }
+    public String getPackage(Context context){return context.getPackageName();}
 
 
 }

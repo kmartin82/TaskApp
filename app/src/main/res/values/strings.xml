@@ -3,13 +3,7 @@
     <string name="name_hint">Name</string>
     <string name="description_hint">Description</string>
     <string name="complete_hint">Complete</string>
-    <string name="remaining_hint">Remaining</string>
     <string name="due_date_hint">Due Date</string>
     <string name="location_hint">Location</string>
     <string name="category_hint">Category</string>
-    <string name="new_task">New Task</string>
-    <string name="complete">Complete</string>
-    <string name="remaining">Remaining</string>
-    <string name="show_favorites">Show Favorites</string>
-    <string name="show_all">Show All</string>
 </resources>

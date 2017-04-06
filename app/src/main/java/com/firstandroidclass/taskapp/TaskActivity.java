@@ -1,25 +1,26 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-public class TaskActivity extends FragmentActivity {
+import java.util.UUID;
+
+public class TaskActivity extends SingleFragmentActivity {
+    public static final String EXTRA_TASK_ID = "com.firstandroidclass.taskapp.task_id";
+
+    public static Intent newIntent(Context packageContext, UUID taskID) {
+        Intent intent = new Intent(packageContext, TaskActivity.class);
+        intent.putExtra(EXTRA_TASK_ID, taskID);
+        return intent;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_task);
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null) {
-            fragment = new TaskFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+    protected Fragment createFragment() {
+        UUID taskID = (UUID) getIntent().getSerializableExtra(EXTRA_TASK_ID);
+        return TaskFragment.newInstance(taskID);
     }
 }

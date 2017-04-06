@@ -1,5 +1,8 @@
 package com.firstandroidclass.taskapp;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.util.Log;
 import java.util.UUID;
@@ -52,8 +55,13 @@ public class Task {
         return mDueDate;
     }
 
-    public void setDueDate(Date dueDate) {
-        mDueDate = dueDate;
+    public void setDueDate(String strDueDate) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date dueDate = df.parse(strDueDate);
+            mDueDate = dueDate;
+        } catch (Exception e) {
+        }
     }
 
     public String getLocation() {

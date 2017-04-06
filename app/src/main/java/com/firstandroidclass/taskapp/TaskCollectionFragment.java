@@ -14,15 +14,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firstandroidclass.taskapp.Task;
-
 import java.util.List;
 
 /*
  * Created by Rick on 4/2/2017.
  */
 
-    public class TaskListFragment extends Fragment {
+    public class TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;
         private boolean mShowFavoritesOnly = false;
@@ -38,13 +36,13 @@ import java.util.List;
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             super.onCreateOptionsMenu(menu, inflater);
-            inflater.inflate(R.menu.fragment_task_list, menu);
+            inflater.inflate(R.menu.fragment_task_collection, menu);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_task_list, container,
+            View view = inflater.inflate(R.layout.fragment_task_collection, container,
                     false);
             mTaskListRecyclerView =
                     (RecyclerView) view.findViewById(R.id.task_list_recycler_view);
@@ -63,17 +61,17 @@ import java.util.List;
         }
 
         private void updateUI() {
-            TaskList taskList = TaskList.get();
-            List<Task> tasks = taskList.getTasks();
+            TaskCollection taskCollection = TaskCollection.get();
+            List<Task> tasks = taskCollection.getTasks();
             if (mTaskAdapter == null) {
                 mTaskAdapter = new TaskAdapter(tasks);
                 mTaskListRecyclerView.setAdapter(mTaskAdapter);
             } else {
                 mTaskAdapter.notifyDataSetChanged();
             }
-            Integer completeCount = taskList.getCountComplete();
+            Integer completeCount = taskCollection.getCountComplete();
             mTextViewComplete.setText(completeCount.toString());
-            Integer remainingCount = taskList.getCountRemaining();
+            Integer remainingCount = taskCollection.getCountRemaining();
             mTextViewRemaining.setText(remainingCount.toString());
         }
 
@@ -82,7 +80,7 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-                    TaskList.get().add(task);
+                    TaskCollection.get().add(task);
                     Intent intent = TaskPagerActivity.newIntent(getActivity(), task.getID());
                     startActivity(intent);
                     return true;
@@ -90,10 +88,10 @@ import java.util.List;
                     mShowFavoritesOnly = !mShowFavoritesOnly;
                     if (mShowFavoritesOnly) {
                         item.setTitle(R.string.show_all);
-                        mTaskAdapter.mTasks = TaskList.get().getCompletedTasks();
+                        mTaskAdapter.mTasks = TaskCollection.get().getCompletedTasks();
                     } else {
                         item.setTitle(R.string.show_favorites);
-                        mTaskAdapter.mTasks = TaskList.get().getTasks();
+                        mTaskAdapter.mTasks = TaskCollection.get().getTasks();
                     }
                     mTaskAdapter.notifyDataSetChanged();
                     return true;

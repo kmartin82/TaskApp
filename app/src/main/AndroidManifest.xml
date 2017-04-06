@@ -15,7 +15,7 @@
         <activity android:name=".TaskPagerActivity">
             android:parentActivityName=".TaskListActivity">
         </activity>
-        <activity android:name=".TaskListActivity">
+        <activity android:name=".TaskCollectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

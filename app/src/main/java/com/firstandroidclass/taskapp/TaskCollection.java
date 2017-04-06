@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TaskList {
-    private static TaskList sTaskList;
+public class TaskCollection {
+    private static TaskCollection sTaskCollection;
     private List<Task> mTasks;
     private Integer countComplete;
     private Integer countRemaining;
@@ -31,7 +31,7 @@ public class TaskList {
         return countComplete;
     }
 
-    private TaskList() {
+    private TaskCollection() {
         mTasks = new ArrayList<>();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -99,11 +99,11 @@ public class TaskList {
         mTasks.add(task);
     }
 
-    public static TaskList get() {
-        if (sTaskList == null) {
-            sTaskList = new TaskList();
+    public static TaskCollection get() {
+        if (sTaskCollection == null) {
+            sTaskCollection = new TaskCollection();
         }
-        return sTaskList;
+        return sTaskCollection;
     }
 
     public List<Task> getTasks() {

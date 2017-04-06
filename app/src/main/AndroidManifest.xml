@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TaskPagerActivity">
-            android:parentActivityName=".TaskListActivity">
+            android:parentActivityName=".TaskCollectionActivity">
         </activity>
         <activity android:name=".TaskCollectionActivity">
             <intent-filter>

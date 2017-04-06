@@ -8,15 +8,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:id="@+id/task_name"
         android:hint="@string/name_hint"
         android:padding="20dp" />
 
-  <EditText
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:id="@+id/task_description"
         android:hint="@string/description_hint"
         android:padding="20dp" />
@@ -39,7 +39,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:id="@+id/task_location"
         android:hint="@string/location_hint"
         android:padding="20dp" />
@@ -47,9 +47,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:id="@+id/task_category"
         android:hint="@string/category_hint"
         android:padding="20dp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/task_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

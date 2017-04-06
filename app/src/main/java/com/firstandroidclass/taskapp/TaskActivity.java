@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
 import java.util.UUID;
 
 public class TaskActivity extends SingleFragmentActivity {
@@ -18,9 +17,13 @@ public class TaskActivity extends SingleFragmentActivity {
         return intent;
     }
 
+
     @Override
     protected Fragment createFragment() {
         UUID taskID = (UUID) getIntent().getSerializableExtra(EXTRA_TASK_ID);
         return TaskFragment.newInstance(taskID);
     }
+
+
+
 }

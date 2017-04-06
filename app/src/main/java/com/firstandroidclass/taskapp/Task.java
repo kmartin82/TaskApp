@@ -13,7 +13,7 @@ public class Task {
     private String mName;
     private String mDescription;
     private boolean mIsComplete;
-    private Date mDueDate;
+    private String mDueDate;
     private String mLocation;
     private Category mCategory;
 
@@ -51,17 +51,12 @@ public class Task {
         mIsComplete = complete;
     }
 
-    public Date getDueDate() {
+    public String getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(String strDueDate) {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        try {
-            Date dueDate = df.parse(strDueDate);
-            mDueDate = dueDate;
-        } catch (Exception e) {
-        }
+    public void setDueDate(String dueDate) {
+        mDueDate = dueDate;
     }
 
     public String getLocation() {
@@ -80,4 +75,6 @@ public class Task {
     public void setCategory(Category category) {
         mCategory = category;
     }
+
+
 }

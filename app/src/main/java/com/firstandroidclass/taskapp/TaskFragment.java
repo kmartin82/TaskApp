@@ -22,9 +22,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
+
 import java.util.UUID;
 
 public class TaskFragment extends Fragment {
+    private static final String ARG_TASK_ID = "task_id";
     private Task mTask;
     private EditText mNameField;
     private EditText mDescriptionField;
@@ -47,7 +49,15 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         UUID taskID = (UUID) getArguments().getSerializable(ARG_TASK_ID);
-        mTask = TaskList.get().getTask(taskID);
+        mTask = TaskCollection.get().getTask(taskID);
+    }
+
+    public static TaskFragment newInstance(UUID taskID){
+        TaskFragment taskFragment = new TaskFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TASK_ID, taskID);
+        taskFragment.setArguments(args);
+        return taskFragment;
     }
 
     @Override

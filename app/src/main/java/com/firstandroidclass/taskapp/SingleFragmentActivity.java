@@ -5,15 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
-    public String getPackage(Context context) {
-        return context.getPackageName();
-    }
+/**
+ * Created by sarahmcculley on 3/20/17.
+ */
 
-    FragmentManager mSupportFragmentManager;
-
+public abstract class SingleFragmentActivity extends FragmentActivity {
     protected abstract Fragment createFragment();
 
     @Override
@@ -22,7 +19,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        Fragment fragment =fm.findFragmentById(R.id.fragment_container);
 
         if (fragment == null) {
             fragment = createFragment();
@@ -31,4 +28,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                     .commit();
         }
     }
+    public String getPackage(Context context){return context.getPackageName();}
+
+
 }

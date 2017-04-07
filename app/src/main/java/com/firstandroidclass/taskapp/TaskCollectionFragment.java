@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-
     public class TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;

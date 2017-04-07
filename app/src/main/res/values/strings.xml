@@ -6,4 +6,10 @@
     <string name="due_date_hint">Due Date</string>
     <string name="location_hint">Location</string>
     <string name="category_hint">Category</string>
+    <string name="remaining_hint">Remaining</string>
+    <string name="new_task">New Task</string>
+    <string name="complete">Complete</string>
+    <string name="remaining">Remaining</string>
+    <string name="show_complete">Show Complete</string>
+    <string name="show_all">Show All</string>
 </resources>

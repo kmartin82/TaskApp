@@ -101,6 +101,22 @@ public class TaskFragment extends Fragment {
             }
         });
 
+        mDueDateField = (EditText) view.findViewById(R.id.task_date);
+        mDueDateField.setText(mTask.getDueDate());
+        mDueDateField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTask.setDueDate(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         mLocationField = (EditText) view.findViewById(R.id.task_location);
         mLocationField.setText(mTask.getLocation());
         mLocationField.addTextChangedListener(new TextWatcher() {

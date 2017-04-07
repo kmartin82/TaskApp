@@ -12,14 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-
-/*
- * Created by Rick on 4/2/2017.
- */
-
     public class TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;
@@ -90,7 +84,7 @@ import java.util.List;
                         item.setTitle(R.string.show_all);
                         mTaskAdapter.mTasks = TaskCollection.get().getCompletedTasks();
                     } else {
-                        item.setTitle(R.string.show_favorites);
+                        item.setTitle(R.string.show_complete);
                         mTaskAdapter.mTasks = TaskCollection.get().getTasks();
                     }
                     mTaskAdapter.notifyDataSetChanged();
@@ -118,8 +112,6 @@ import java.util.List;
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), mTask.getName() + " clicked.",
-                        Toast.LENGTH_SHORT).show();
                 Intent intent = TaskPagerActivity.newIntent(getActivity(), mTask.getID());
                 startActivity(intent);
             }
@@ -143,7 +135,6 @@ import java.util.List;
             @Override
             public void onBindViewHolder(TaskHolder holder, int position) {
                 Task task = mTasks.get(position);
-                //holder.mContactNameTextView.setText(contact.getName());
                 holder.bindContact(task);
             }
 

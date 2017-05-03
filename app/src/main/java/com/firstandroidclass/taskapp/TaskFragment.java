@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +20,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +31,7 @@ public class TaskFragment extends Fragment {
     private CheckBox mCompletionCheckBox;
     private EditText mDueDateField;
     private EditText mLocationField;
+    private Spinner mCategorySpinner;
     private MapView mMapView;
 
     private static final String ARG_TASK_ID = "task_id";

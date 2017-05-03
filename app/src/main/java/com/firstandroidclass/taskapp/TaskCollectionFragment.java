@@ -89,6 +89,10 @@ import java.util.List;
                     }
                     mTaskAdapter.notifyDataSetChanged();
                     return true;
+                case R.id.menu_item_show_categories:
+                    Intent categoriesIntent = new Intent(getContext(), CategoryCollectionActivity.class);
+                    startActivity(categoriesIntent);
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
@@ -105,7 +109,7 @@ import java.util.List;
                 mTaskNameTextView = (TextView) itemView;
             }
 
-            public void bindContact(Task task) {
+            public void bindTask(Task task) {
                 mTask = task;
                 mTaskNameTextView.setText(task.getName());
             }
@@ -135,7 +139,7 @@ import java.util.List;
             @Override
             public void onBindViewHolder(TaskHolder holder, int position) {
                 Task task = mTasks.get(position);
-                holder.bindContact(task);
+                holder.bindTask(task);
             }
 
             @Override

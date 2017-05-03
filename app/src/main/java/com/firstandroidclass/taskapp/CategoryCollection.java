@@ -15,9 +15,9 @@ public class CategoryCollection {
 
     private CategoryCollection(){
         mCategories = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 1; i <= 5; i++){
             Category category = new Category();
-            category.setName("Name " + i);
+            category.setName("Category " + i);
             category.setColor(Color.values()[i %Color.values().length]);
             mCategories.add(category);
         }

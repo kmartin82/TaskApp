@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
-import android.widget.Spinner;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -31,7 +29,6 @@ public class TaskFragment extends Fragment {
     private CheckBox mCompletionCheckBox;
     private EditText mDueDateField;
     private EditText mLocationField;
-    private Spinner mCategorySpinner;
     private MapView mMapView;
 
     private static final String ARG_TASK_ID = "task_id";

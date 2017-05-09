@@ -1,10 +1,10 @@
 package com.firstandroidclass.taskapp;
 
-import android.support.v4.app.Fragment;
-
-/**
- * Created by sarahmcculley on 3/21/17.
+/*
+ * Created by Rick on 4/2/2017.
  */
+
+import android.support.v4.app.Fragment;
 
 public class TaskCollectionActivity extends SingleFragmentActivity {
     @Override

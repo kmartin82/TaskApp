@@ -1,6 +1,7 @@
 package com.firstandroidclass.taskapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -8,11 +9,17 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +27,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +40,7 @@ public class TaskFragment extends Fragment {
     private EditText mLocationField;
     private MapView mMapView;
     private Callbacks mCallbacks;
+    private Spinner mCategorySpinner;
 
     public interface Callbacks {
         void onTaskUpdated(Task task);
@@ -62,9 +69,30 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         UUID taskID = (UUID) getArguments().getSerializable(ARG_TASK_ID);
         mTask = TaskCollection.get(getContext()).getTask(taskID);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_task, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete_task:
+                TaskCollection.get(getContext()).deleteTask(mTask);
+                Intent intent = new Intent(getContext(), TaskCollectionActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -153,6 +181,27 @@ public class TaskFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+        mCategorySpinner = (Spinner) view.findViewById(R.id.task_category);
+        final CategoryCollection categoryCollection = CategoryCollection.get();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item);
+        for (Category c: categoryCollection) {
+            arrayAdapter.add(c.getName());
+        }
+        mCategorySpinner.setAdapter(arrayAdapter);
+        mCategorySpinner.setSelection(categoryCollection.getIndex(mTask.getCategory()));
+        mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mTask.setCategory(categoryCollection.getCategoryByIndex(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         mLocationField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -200,6 +249,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        TaskCollection.get(getContext()).updateContact(mTask);
         mMapView.onPause();
     }
 

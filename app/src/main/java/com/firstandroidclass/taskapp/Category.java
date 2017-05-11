@@ -2,15 +2,14 @@ package com.firstandroidclass.taskapp;
 
 import java.util.UUID;
 
-enum Color {GREEN, YELLOW, RED}
 
 public class Category {
     private UUID mID;
-    private Color mColor;
     private String mName;
 
-    public Category() {
+    public Category(String name) {
         mID = UUID.randomUUID();
+        mName = name;
     }
 
     public String getName() {
@@ -20,8 +19,6 @@ public class Category {
     public void setName(String name) {
         mName = name;
     }
-
-    public void setColor(Color color) {mColor = color;}
   
     public UUID getID() {
         return mID;

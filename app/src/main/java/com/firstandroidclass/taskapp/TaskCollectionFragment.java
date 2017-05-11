@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-    public class TaskCollectionFragment extends Fragment {
+    public class  TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;
         private boolean mShowFavoritesOnly = false;
@@ -71,13 +71,14 @@ import java.util.List;
             updateUI();
         }
 
-        public void updateUI() {
+        private void updateUI() {
             TaskCollection taskCollection = TaskCollection.get(getContext());
             List<Task> tasks = taskCollection.getTasks();
             if (mTaskAdapter == null) {
                 mTaskAdapter = new TaskAdapter(tasks);
                 mTaskListRecyclerView.setAdapter(mTaskAdapter);
             } else {
+                mTaskAdapter.setTasks(tasks);
                 mTaskAdapter.notifyDataSetChanged();
             }
             Integer completeCount = taskCollection.getCountComplete();
@@ -91,9 +92,9 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-                    //TaskCollection.get(getContext()).add(task);
-                    //TaskCollection.get(add(task));
+
                     mCallbacks.onTaskSelected(task);
+
                     return true;
                 case R.id.menu_item_toggle_complete:
                     mShowFavoritesOnly = !mShowFavoritesOnly;
@@ -105,6 +106,10 @@ import java.util.List;
                         mTaskAdapter.mTasks = TaskCollection.get(getContext()).getTasks();
                     }
                     mTaskAdapter.notifyDataSetChanged();
+                    return true;
+                case R.id.menu_item_show_categories:
+                    Intent categoriesIntent = new Intent(getContext(), CategoryCollectionActivity.class);
+                    startActivity(categoriesIntent);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
@@ -122,7 +127,7 @@ import java.util.List;
                 mTaskNameTextView = (TextView) itemView;
             }
 
-            public void bindContact(Task task) {
+            public void bindTask(Task task) {
                 mTask = task;
                 mTaskNameTextView.setText(task.getName());
             }
@@ -151,12 +156,17 @@ import java.util.List;
             @Override
             public void onBindViewHolder(TaskHolder holder, int position) {
                 Task task = mTasks.get(position);
-                holder.bindContact(task);
+                holder.bindTask(task);
             }
 
             @Override
             public int getItemCount() {
                 return mTasks.size();
             }
+
+            public void setTasks(List<Task> tasks) {
+                mTasks = tasks;
+            }
         }
+
     }

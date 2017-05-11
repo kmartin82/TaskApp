@@ -12,10 +12,15 @@ public class Task {
     private boolean mIsComplete;
     private String mDueDate;
     private String mLocation;
-    private Category mCategory;
+    private Category mCategory = CategoryCollection.get().getCategoryByIndex(0);
 
     public Task(){
-        mID = UUID.randomUUID();
+        this(UUID.randomUUID());
+
+    }
+
+    public Task(UUID id) {
+        mID = id;
     }
 
     public UUID getID() {

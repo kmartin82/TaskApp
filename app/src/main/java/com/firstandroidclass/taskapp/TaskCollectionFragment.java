@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,20 +13,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-
-/*
- * Created by Rick on 4/2/2017.
- */
-
     public class TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;
         private boolean mShowFavoritesOnly = false;
         private TextView mTextViewComplete;
         private TextView mTextViewRemaining;
+        private Callbacks mCallbacks;
+
+        public interface Callbacks {
+            void onTaskSelected(Task task);
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            mCallbacks = (Callbacks) context;
+        }
+        @Override
+        public void onDetach() {
+            super.onDetach();
+            mCallbacks = null;
+        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +71,8 @@ import java.util.List;
             updateUI();
         }
 
-        private void updateUI() {
-            TaskCollection taskCollection = TaskCollection.get();
+        public void updateUI() {
+            TaskCollection taskCollection = TaskCollection.get(getContext());
             List<Task> tasks = taskCollection.getTasks();
             if (mTaskAdapter == null) {
                 mTaskAdapter = new TaskAdapter(tasks);
@@ -80,18 +91,18 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-                    TaskCollection.get().add(task);
-                    Intent intent = TaskPagerActivity.newIntent(getActivity(), task.getID());
-                    startActivity(intent);
+                    //TaskCollection.get(getContext()).add(task);
+                    //TaskCollection.get(add(task));
+                    mCallbacks.onTaskSelected(task);
                     return true;
                 case R.id.menu_item_toggle_complete:
                     mShowFavoritesOnly = !mShowFavoritesOnly;
                     if (mShowFavoritesOnly) {
                         item.setTitle(R.string.show_all);
-                        mTaskAdapter.mTasks = TaskCollection.get().getCompletedTasks();
+                        mTaskAdapter.mTasks = TaskCollection.get(getContext()).getCompletedTasks();
                     } else {
-                        item.setTitle(R.string.show_favorites);
-                        mTaskAdapter.mTasks = TaskCollection.get().getTasks();
+                        item.setTitle(R.string.show_complete);
+                        mTaskAdapter.mTasks = TaskCollection.get(getContext()).getTasks();
                     }
                     mTaskAdapter.notifyDataSetChanged();
                     return true;
@@ -118,10 +129,7 @@ import java.util.List;
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), mTask.getName() + " clicked.",
-                        Toast.LENGTH_SHORT).show();
-                Intent intent = TaskPagerActivity.newIntent(getActivity(), mTask.getID());
-                startActivity(intent);
+                mCallbacks.onTaskSelected(mTask);
             }
         }
 
@@ -143,7 +151,6 @@ import java.util.List;
             @Override
             public void onBindViewHolder(TaskHolder holder, int position) {
                 Task task = mTasks.get(position);
-                //holder.mContactNameTextView.setText(contact.getName());
                 holder.bindContact(task);
             }
 

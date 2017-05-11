@@ -1,31 +1,19 @@
 package com.firstandroidclass.taskapp;
 
-/*
- * Created by Rick on 3/12/2017.
- */
-
 import android.content.Context;
-//import android.content.Task;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
-//import com.google.android.gms.appindexing.Action;
-//import com.google.android.gms.appindexing.AppIndex;
-//import com.google.android.gms.appindexing.Thing;
-
 import java.util.List;
 import java.util.UUID;
 
-/*
- * Created by Rick on 2/26/2017.
- */
 
-public class TaskPagerActivity extends AppCompatActivity {
+public class TaskPagerActivity extends AppCompatActivity implements TaskFragment.Callbacks{
     private static final String EXTRA_TASK_ID = "com.com.firstandroidclass.taskapp.contact_id";
     private ViewPager mViewPager;
     private List<Task> mTasks;
@@ -41,7 +29,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_pager);
 
-        mTasks = TaskCollection.get().getTasks();
+        mTasks = TaskCollection.get(this).getTasks();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager = (ViewPager) findViewById(
                 R.id.activity_task_pager_view_pager);
@@ -69,12 +57,6 @@ public class TaskPagerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+    public void onTaskUpdated(Task task) {
     }
 }

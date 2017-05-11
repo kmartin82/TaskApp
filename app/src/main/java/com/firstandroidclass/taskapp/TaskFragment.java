@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -32,7 +33,22 @@ public class TaskFragment extends Fragment {
     private EditText mDueDateField;
     private EditText mLocationField;
     private MapView mMapView;
+    private Callbacks mCallbacks;
 
+    public interface Callbacks {
+        void onTaskUpdated(Task task);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks)context;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
     private static final String ARG_TASK_ID = "task_id";
 
     public static TaskFragment newInstance(UUID taskID) {
@@ -47,7 +63,7 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         UUID taskID = (UUID) getArguments().getSerializable(ARG_TASK_ID);
-        mTask = TaskCollection.get().getTask(taskID);
+        mTask = TaskCollection.get(getContext()).getTask(taskID);
     }
 
     @Override
@@ -65,6 +81,9 @@ public class TaskFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTask.setName(s.toString());
+                //TaskCollection.get(getContext()).updateTask(mTask);
+                TaskCollection.get(getContext());
+                mCallbacks.onTaskUpdated(mTask);
             }
 
             @Override
@@ -101,6 +120,22 @@ public class TaskFragment extends Fragment {
             }
         });
 
+        mDueDateField = (EditText) view.findViewById(R.id.task_date);
+        mDueDateField.setText(mTask.getDueDate());
+        mDueDateField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTask.setDueDate(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         mLocationField = (EditText) view.findViewById(R.id.task_location);
         mLocationField.setText(mTask.getLocation());
         mLocationField.addTextChangedListener(new TextWatcher() {

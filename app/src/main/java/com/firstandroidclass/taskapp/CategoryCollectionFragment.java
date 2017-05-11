@@ -60,7 +60,7 @@ public class CategoryCollectionFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = CategoryActivity.newIntent(getActivity(), mCategory.getID());
+            Intent intent = CategoryPagerActivity.newIntent(getActivity(), mCategory.getID());
             startActivity(intent);
         }
     }

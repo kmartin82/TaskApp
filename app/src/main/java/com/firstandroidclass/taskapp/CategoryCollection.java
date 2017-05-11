@@ -1,6 +1,7 @@
 package com.firstandroidclass.taskapp;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,19 +9,16 @@ import java.util.UUID;
  * Created by sarahmcculley on 3/13/17.
  */
 
-public class CategoryCollection {
+public class CategoryCollection implements Iterable<Category> {
 
     private static CategoryCollection mCategoryCollection;
-    private List<Category> mCategories;
+    private List<Category> mCategories = new ArrayList<>();
 
     private CategoryCollection(){
-        mCategories = new ArrayList<>();
-        for (int i = 1; i <= 5; i++){
-            Category category = new Category();
-            category.setName("Category " + i);
-            category.setColor(Color.values()[i %Color.values().length]);
-            mCategories.add(category);
-        }
+        mCategories.add(new Category("Work"));
+        mCategories.add(new Category("Personal"));
+        mCategories.add(new Category("School"));
+        mCategories.add(new Category("Other"));
     }
 
     //singleton pattern
@@ -43,5 +41,18 @@ public class CategoryCollection {
         }
         return null;
     }
+
+    public int getIndex(Category category) {
+        return mCategories.indexOf(category);
+    }
+
+    public Category getCategoryByIndex(int index) {
+        return mCategories.get(index);
+    }
+
+        @Override
+        public Iterator<Category> iterator() {
+            return mCategories.iterator();
+        }
 
 }

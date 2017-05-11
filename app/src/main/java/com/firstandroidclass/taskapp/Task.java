@@ -32,7 +32,6 @@ public class Task {
     }
 
     public void setName(String name) {
-        Log.i(TAG, "New name: " + name);
         mName = name;
     }
 
@@ -41,7 +40,6 @@ public class Task {
     }
 
     public void setDescription(String description) {
-        Log.i(TAG, "New description: " + description);
         mDescription = description;
     }
 
@@ -67,7 +65,6 @@ public class Task {
 
     public void setLocation(String location) {
         mLocation = location;
-        Log.i(TAG, "New location: " + mLocation);
     }
 
     public Category getCategory() {

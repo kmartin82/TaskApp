@@ -71,7 +71,7 @@ import java.util.List;
             updateUI();
         }
 
-        private void updateUI() {
+        public void updateUI() {
             TaskCollection taskCollection = TaskCollection.get(getContext());
             List<Task> tasks = taskCollection.getTasks();
             if (mTaskAdapter == null) {
@@ -92,7 +92,7 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-
+                    TaskCollection.get(getContext()).add(task);
                     mCallbacks.onTaskSelected(task);
 
                     return true;

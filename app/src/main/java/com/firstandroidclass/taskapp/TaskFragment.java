@@ -110,7 +110,7 @@ public class TaskFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTask.setName(s.toString());
                 //TaskCollection.get(getContext()).updateTask(mTask);
-                TaskCollection.get(getContext());
+                TaskCollection.get(getContext()).updateContact(mTask);
                 mCallbacks.onTaskUpdated(mTask);
             }
 

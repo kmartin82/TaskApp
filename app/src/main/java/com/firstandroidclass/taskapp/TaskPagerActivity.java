@@ -28,7 +28,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_pager);
 
-        mTasks = TaskCollection.get().getTasks();
+        mTasks = TaskCollection.get(this).getTasks();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager = (ViewPager) findViewById(
                 R.id.activity_task_pager_view_pager);

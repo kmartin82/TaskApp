@@ -15,7 +15,12 @@ public class Task {
     private Category mCategory = CategoryCollection.get().getCategoryByIndex(0);
 
     public Task(){
-        mID = UUID.randomUUID();
+        this(UUID.randomUUID());
+
+    }
+
+    public Task(UUID id) {
+        mID = id;
     }
 
     public UUID getID() {

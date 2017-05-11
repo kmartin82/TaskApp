@@ -12,4 +12,5 @@
     <string name="remaining">Remaining</string>
     <string name="show_complete">Show Complete</string>
     <string name="show_all">Show All</string>
+    <string name="delete_task">Delete</string>
 </resources>

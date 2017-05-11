@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-    public class TaskCollectionFragment extends Fragment {
+    public class  TaskCollectionFragment extends Fragment {
         private RecyclerView mTaskListRecyclerView;
         private TaskAdapter mTaskAdapter;
         private boolean mShowFavoritesOnly = false;
@@ -55,12 +55,13 @@ import java.util.List;
         }
 
         private void updateUI() {
-            TaskCollection taskCollection = TaskCollection.get();
+            TaskCollection taskCollection = TaskCollection.get(getContext());
             List<Task> tasks = taskCollection.getTasks();
             if (mTaskAdapter == null) {
                 mTaskAdapter = new TaskAdapter(tasks);
                 mTaskListRecyclerView.setAdapter(mTaskAdapter);
             } else {
+                mTaskAdapter.setTasks(tasks);
                 mTaskAdapter.notifyDataSetChanged();
             }
             Integer completeCount = taskCollection.getCountComplete();
@@ -74,7 +75,7 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-                    TaskCollection.get().add(task);
+                    TaskCollection.get(getContext()).add(task);
                     Intent intent = TaskPagerActivity.newIntent(getActivity(), task.getID());
                     startActivity(intent);
                     return true;
@@ -82,10 +83,10 @@ import java.util.List;
                     mShowFavoritesOnly = !mShowFavoritesOnly;
                     if (mShowFavoritesOnly) {
                         item.setTitle(R.string.show_all);
-                        mTaskAdapter.mTasks = TaskCollection.get().getCompletedTasks();
+                        mTaskAdapter.mTasks = TaskCollection.get(getContext()).getCompletedTasks();
                     } else {
                         item.setTitle(R.string.show_complete);
-                        mTaskAdapter.mTasks = TaskCollection.get().getTasks();
+                        mTaskAdapter.mTasks = TaskCollection.get(getContext()).getTasks();
                     }
                     mTaskAdapter.notifyDataSetChanged();
                     return true;
@@ -142,5 +143,10 @@ import java.util.List;
             public int getItemCount() {
                 return mTasks.size();
             }
+
+            public void setTasks(List<Task> tasks) {
+                mTasks = tasks;
+            }
         }
+
     }

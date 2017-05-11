@@ -1,8 +1,14 @@
 package com.firstandroidclass.taskapp;
 
+import android.database.Cursor;
+
+import com.firstandroidclass.taskapp.database.TaskCursorWrapper;
+import com.firstandroidclass.taskapp.database.TaskDbSchema;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 /**
  * Created by sarahmcculley on 3/13/17.
@@ -42,6 +48,22 @@ public class CategoryCollection {
             }
         }
         return null;
+    }
+
+    public Category getCategory(String name) {
+        for (Category category: mCategories) {
+            if (category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
+    }
+
+    public Category add(String name) {
+        Category category = new Category();
+        category.setName(name);
+        category.setColor(Color.GREEN);
+        return category;
     }
 
 }

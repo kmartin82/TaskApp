@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,8 +39,23 @@ public class TaskFragment extends Fragment {
     private EditText mDueDateField;
     private EditText mLocationField;
     private MapView mMapView;
+    private Callbacks mCallbacks;
     private Spinner mCategorySpinner;
 
+    public interface Callbacks {
+        void onTaskUpdated(Task task);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks)context;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
     private static final String ARG_TASK_ID = "task_id";
 
     public static TaskFragment newInstance(UUID taskID) {
@@ -93,6 +109,9 @@ public class TaskFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTask.setName(s.toString());
+                //TaskCollection.get(getContext()).updateTask(mTask);
+                TaskCollection.get(getContext());
+                mCallbacks.onTaskUpdated(mTask);
             }
 
             @Override

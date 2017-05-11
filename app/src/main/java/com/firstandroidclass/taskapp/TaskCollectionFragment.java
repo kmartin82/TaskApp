@@ -1,5 +1,6 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,22 @@ import java.util.List;
         private boolean mShowFavoritesOnly = false;
         private TextView mTextViewComplete;
         private TextView mTextViewRemaining;
+        private Callbacks mCallbacks;
+
+        public interface Callbacks {
+            void onTaskSelected(Task task);
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            mCallbacks = (Callbacks) context;
+        }
+        @Override
+        public void onDetach() {
+            super.onDetach();
+            mCallbacks = null;
+        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -75,9 +92,9 @@ import java.util.List;
             switch (item.getItemId()) {
                 case R.id.menu_item_create_task:
                     Task task = new Task();
-                    TaskCollection.get(getContext()).add(task);
-                    Intent intent = TaskPagerActivity.newIntent(getActivity(), task.getID());
-                    startActivity(intent);
+
+                    mCallbacks.onTaskSelected(task);
+
                     return true;
                 case R.id.menu_item_toggle_complete:
                     mShowFavoritesOnly = !mShowFavoritesOnly;
@@ -117,8 +134,7 @@ import java.util.List;
 
             @Override
             public void onClick(View v) {
-                Intent intent = TaskPagerActivity.newIntent(getActivity(), mTask.getID());
-                startActivity(intent);
+                mCallbacks.onTaskSelected(mTask);
             }
         }
 

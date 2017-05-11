@@ -58,10 +58,8 @@ public class CategoryCollection implements Iterable<Category> {
     }
 
     public Category add(String name) {
-        Category category = new Category();
-        category.setName(name);
-        category.setColor(Color.GREEN);
-        return category;
+        return new Category(name);
+
     }
 
     public int getIndex(Category category) {

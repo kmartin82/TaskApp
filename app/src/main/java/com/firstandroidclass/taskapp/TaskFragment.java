@@ -9,9 +9,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +22,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +34,7 @@ public class TaskFragment extends Fragment {
     private EditText mDueDateField;
     private EditText mLocationField;
     private MapView mMapView;
+    private Spinner mCategorySpinner;
 
     private static final String ARG_TASK_ID = "task_id";
 
@@ -134,6 +137,27 @@ public class TaskFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+        mCategorySpinner = (Spinner) view.findViewById(R.id.task_category);
+        final CategoryCollection categoryCollection = CategoryCollection.get();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item);
+        for (Category c: categoryCollection) {
+            arrayAdapter.add(c.getName());
+        }
+        mCategorySpinner.setAdapter(arrayAdapter);
+        mCategorySpinner.setSelection(categoryCollection.getIndex(mTask.getCategory()));
+        mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mTask.setCategory(categoryCollection.getCategoryByIndex(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         mLocationField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

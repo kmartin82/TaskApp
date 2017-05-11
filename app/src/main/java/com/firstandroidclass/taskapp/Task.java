@@ -1,8 +1,5 @@
 package com.firstandroidclass.taskapp;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.util.Log;
 import java.util.UUID;

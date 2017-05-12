@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class TaskPagerActivity extends AppCompatActivity {
+public class TaskPagerActivity extends AppCompatActivity implements TaskFragment.Callbacks{
     private static final String EXTRA_TASK_ID = "com.com.firstandroidclass.taskapp.contact_id";
     private ViewPager mViewPager;
     private List<Task> mTasks;
@@ -28,7 +29,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_pager);
 
-        mTasks = TaskCollection.get().getTasks();
+        mTasks = TaskCollection.get(this).getTasks();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager = (ViewPager) findViewById(
                 R.id.activity_task_pager_view_pager);
@@ -55,4 +56,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onTaskUpdated(Task task) {
+    }
 }

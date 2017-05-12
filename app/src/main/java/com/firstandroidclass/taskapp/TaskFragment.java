@@ -1,5 +1,7 @@
 package com.firstandroidclass.taskapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -7,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,8 +39,23 @@ public class TaskFragment extends Fragment {
     private EditText mDueDateField;
     private EditText mLocationField;
     private MapView mMapView;
+    private Callbacks mCallbacks;
     private Spinner mCategorySpinner;
 
+    public interface Callbacks {
+        void onTaskUpdated(Task task);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks)context;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
     private static final String ARG_TASK_ID = "task_id";
 
     public static TaskFragment newInstance(UUID taskID) {
@@ -49,9 +69,30 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         UUID taskID = (UUID) getArguments().getSerializable(ARG_TASK_ID);
-        mTask = TaskCollection.get().getTask(taskID);
+        mTask = TaskCollection.get(getContext()).getTask(taskID);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_task, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete_task:
+                TaskCollection.get(getContext()).deleteTask(mTask);
+                Intent intent = new Intent(getContext(), TaskCollectionActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +109,9 @@ public class TaskFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTask.setName(s.toString());
+                //TaskCollection.get(getContext()).updateTask(mTask);
+                TaskCollection.get(getContext()).updateContact(mTask);
+                mCallbacks.onTaskUpdated(mTask);
             }
 
             @Override
@@ -205,6 +249,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        TaskCollection.get(getContext()).updateContact(mTask);
         mMapView.onPause();
     }
 
